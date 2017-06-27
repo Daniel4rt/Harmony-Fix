@@ -12,6 +12,7 @@
 #include "timer.h"
 #include "thread.h"
 #include "mempool.h"
+#include "../common/harmony.h"
 #include "sql.h"
 #endif
 #include <stdlib.h>
@@ -359,7 +360,7 @@ int main (int argc, char **argv)
 
 	timer_init();
 	socket_init();
-
+	harmony_core_init();
 	do_init(argc,argv);
 
 	// Main runtime cycle
@@ -367,7 +368,7 @@ int main (int argc, char **argv)
 		int next = do_timer(gettick_nocache());
 		do_sockets(next);
 	}
-
+	harmony_core_final();
 	do_final();
 
 	timer_final();

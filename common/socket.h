@@ -79,6 +79,8 @@ struct socket_data
 		unsigned char ping : 2;
 	} flag;
 
+	void *harm_sd;
+
 	uint32 client_addr; // remote client address
 
 	uint8 *rdata, *wdata;

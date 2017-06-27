@@ -35,6 +35,7 @@ struct mmo_account {
 	unsigned int logincount;// number of successful auth attempts
 	char lastlogin[24];     // date+time of last successful login
 	char last_ip[16];       // save of last IP of connection
+	char mac_address[20];
 	char birthdate[10+1];   // assigned birth date (format: YYYY-MM-DD, default: 0000-00-00)
 	char pincode[PINCODE_LENGTH+1];		// pincode system
 	time_t pincode_change;	// (timestamp): last time of pincode change
@@ -72,6 +73,10 @@ struct AccountDB {
 	///
 	/// @param self Database
 	void (*destroy)(AccountDB* self);
+
+	/// Check if MAC is banned
+	/// @param self mac
+	bool (*is_mac_banned)(AccountDB* self, const char *mac);
 
 	/// Gets a property from this database.
 	/// These read-only properties must be implemented:

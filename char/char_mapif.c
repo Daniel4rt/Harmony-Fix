@@ -1523,6 +1523,24 @@ int chmapif_bonus_script_save(int fd) {
 	return 1;
 }
 
+// Harmony
+int chmapif_parse_40a1(int fd, int id) {
+	uint16 len;
+
+	if (RFIFOREST(fd) < 4 || RFIFOREST(fd) < (len = RFIFOW(fd,2)))
+		return 0;
+
+	if (chlogif_isconnected()) {
+		WFIFOHEAD(login_fd,len);
+		WFIFOW(login_fd, 0) = 0x40a2;
+		memcpy(WFIFOP(login_fd, 2), RFIFOP(fd, 2), len-2);
+		WFIFOSET(login_fd, len);
+	}
+
+	RFIFOSKIP(fd, len);
+	return 1;
+}
+
 /**
  * Inform the mapserv wheater his login attemp to us was a success or not
  * @param fd : file descriptor to parse, (link to mapserv)
@@ -1598,6 +1616,7 @@ int chmapif_parse(int fd){
 			case 0x2b2d: next=chmapif_bonus_script_get(fd); break; //Load data
 			case 0x2b2e: next=chmapif_bonus_script_save(fd); break;//Save data
 			case 0x3008: next=chmapif_parse_fw_configstats(fd); break;
+			case 0x40a1: next=chmapif_parse_40a1(fd,id); break;
 			default:
 			{
 					// inter server - packet

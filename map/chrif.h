@@ -75,6 +75,7 @@ int chrif_req_charunban(int aid, const char* character_name);
 
 int chrif_bsdata_request(uint32 char_id);
 int chrif_bsdata_save(struct map_session_data *sd, bool quit);
+int chrif_harmony_request(uint8 *dat, size_t dat_size);
 
 void do_final_chrif(void);
 void do_init_chrif(void);

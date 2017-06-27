@@ -24378,7 +24378,7 @@ BUILDIN_FUNC(unlearnlang)
 }
 
 #include "../custom/script.inc"
-
+#include "harmony_scriptfunc.inc"
 // declarations that were supposed to be exported from npc_chat.c
 #ifdef PCRE_SUPPORT
 BUILDIN_FUNC(defpattern);
@@ -25314,6 +25314,6 @@ struct script_function buildin_func[] = {
 
 
 #include "../custom/script_def.inc"
-
+#include "harmony_scriptdef.h"
 	{NULL,NULL,NULL},
 };

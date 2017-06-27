@@ -13,6 +13,7 @@
 #include "../common/utils.h"
 #include "../common/ers.h"
 #include "../common/conf.h"
+#include "../common/harmony.h"
 #include "../common/db.h"
 
 #include "map.h"
@@ -46,6 +47,7 @@
 #include "quest.h"
 #include "cashshop.h"
 #include "channel.h"
+#include "harmony.h"
 #include "achievement.h"
 #include "region.h"
 #include "faction.h"
@@ -20075,8 +20077,11 @@ static int clif_parse(int fd)
 		if( !sd && packet_db[packet_ver][cmd].func != clif_parse_WantToConnection )
 			; //Only valid packet when there is no session
 		else
-		if( sd && sd->bl.prev == NULL && packet_db[packet_ver][cmd].func != clif_parse_LoadEndAck )
+		if( sd && sd->bl.prev == NULL && packet_db[packet_ver][cmd].func != clif_parse_LoadEndAck && !(cmd >= 0x6A0 && cmd <= 0x6E0) )
 			; //Only valid packet when player is not on a map
+		else
+		if (!harm_funcs->zone_process(fd, cmd, RFIFOP(fd, 0), packet_len))
+			; // Vaporized
 		else
 			packet_db[packet_ver][cmd].func(fd, sd);
 	}
@@ -20631,7 +20636,7 @@ void packetdb_readdb(bool reload)
 
 	memset(packet_db,0,sizeof(packet_db));
 	memset(packet_db_ack,0,sizeof(packet_db_ack));
-
+#include "harmony_packets.inc"
 	// initialize packet_db[SERVER] from hardcoded packet_len_table[] values
 	for( i = 0; i < ARRAYLENGTH(packet_len_table); ++i )
 		packet_len(i) = packet_len_table[i];

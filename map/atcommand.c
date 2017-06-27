@@ -13,7 +13,7 @@
 #include "../common/strlib.h"
 #include "../common/utils.h"
 #include "../common/conf.h"
-
+#include "../common/harmony.h"
 #include "map.h"
 #include "atcommand.h"
 #include "battle.h"
@@ -12373,7 +12373,7 @@ ACMD_FUNC(hold)
 
 
 #include "../custom/atcommand.inc"
-
+#include "harmony_atcommand.inc"
 /**
  * Fills the reference of available commands in atcommand DBMap
  **/
@@ -12389,6 +12389,7 @@ void atcommand_basecommands(void) {
 	 **/
 	AtCommandInfo atcommand_base[] = {
 #include "../custom/atcommand_def.inc"
+#include "harmony_atcommanddef_ra.inc"
 		// [Oboro] -----------------
 		ACMD_DEF(dance),
 		ACMD_DEF(allchat),

@@ -83,6 +83,7 @@ set( COMMON_BASE_HEADERS
 	"${COMMON_SOURCE_DIR}/mempool.h"
 	"${COMMON_SOURCE_DIR}/msg_conf.h"
 	"${COMMON_SOURCE_DIR}/cli.h"
+	"${COMMON_SOURCE_DIR}/harmony.h"
 	${LIBCONFIG_HEADERS} # needed by conf.h/showmsg.h
 	CACHE INTERNAL "common_base headers" )
 set( COMMON_BASE_SOURCES
@@ -108,6 +109,7 @@ set( COMMON_BASE_SOURCES
 	"${COMMON_SOURCE_DIR}/raconf.c"
 	"${COMMON_SOURCE_DIR}/msg_conf.c"
 	"${COMMON_SOURCE_DIR}/cli.c"
+	"${COMMON_SOURCE_DIR}/harmonycore.c"
 	${LIBCONFIG_SOURCES} # needed by conf.c/showmsg.c
 	CACHE INTERNAL "common_base sources" )
 set( COMMON_BASE_INCLUDE_DIRS

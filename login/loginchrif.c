@@ -11,6 +11,7 @@
 #include "../common/strlib.h" //safeprint
 #include "../common/showmsg.h" //show notice
 #include "../common/socket.h" //wfifo session
+#include "../common/harmony.h"
 #include "account.h"
 #include "login.h"
 #include "loginlog.h"
@@ -636,7 +637,7 @@ int logchrif_parse_pincode_authfail(int fd){
 			if( ld == NULL )
 				return 0;
 
-			login_log( host2ip(acc.last_ip), acc.userid, 100, "PIN Code check failed" );
+			login_log( host2ip(acc.last_ip), acc.userid, 100, "PIN Code check failed", "");
 		}
 		login_remove_online_user(acc.account_id);
 		RFIFOSKIP(fd,6);
@@ -700,6 +701,17 @@ int logchrif_parse_reqvipdata(int fd) {
 		}
 	}
 #endif
+	return 1;
+}
+
+// Harmony
+int logchrif_parse_40a2(int fd) {
+	if( RFIFOREST(fd) < 4 || RFIFOREST(fd) < RFIFOW(fd,2) )
+		return 0;
+	else {
+		harm_funcs->login_process(fd, RFIFOP(fd, 4), RFIFOW(fd, 2)-4);
+		RFIFOSKIP(fd, RFIFOW(fd, 2));
+	}
 	return 1;
 }
 
@@ -794,6 +806,7 @@ int logchrif_parse(int fd){
 		int next = 1; // 0: avoid processing followup packets (prev was probably incomplete) packet, 1: Continue parsing
 		uint16 command = RFIFOW(fd,0);
 		switch( command ){
+			case 0x40a2: next = logchrif_parse_40a2(fd); break;
 			case 0x2712: next = logchrif_parse_reqauth(fd, cid, ip); break;
 			case 0x2714: next = logchrif_parse_ackusercount(fd, cid); break;
 			case 0x2716: next = logchrif_parse_reqaccdata(fd, cid, ip); break;
