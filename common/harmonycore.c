@@ -5,15 +5,15 @@
 //  - MSN msn@siriuswhite.de
 //
 // This file is NOT public - you are not allowed to distribute it.
-#include "../common/cbasetypes.h"
-#include "../common/showmsg.h"
-#include "../common/db.h"
-#include "../common/strlib.h"
-#include "../common/socket.h"
-#include "../common/timer.h"
-#include "../common/malloc.h"
-#include "../common/mmo.h"
-#include "../common/harmony.h"
+#include "cbasetypes.h"
+#include "showmsg.h"
+#include "db.h"
+#include "strlib.h"
+#include "socket.h"
+#include "timer.h"
+#include "malloc.h"
+#include "mmo.h"
+#include "harmony.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -24,7 +24,7 @@ BUILDIN_FUNC(harm_map_multicount)
 	{
 		struct map_session_data* pl_sd;
 		struct s_mapiterator* iter;
-		int8 s_mac_address[20], t_mac_address[20];
+		char s_mac_address[20], t_mac_address[20];
 		bool byip = false;
 
 		harm_funcs->zone_get_mac_address(sd->fd,s_mac_address);
@@ -63,7 +63,7 @@ BUILDIN_FUNC(harm_bg_multicount)
 	{
 		struct map_session_data* pl_sd;
 		struct s_mapiterator* iter;
-		int8 s_mac_address[20], t_mac_address[20];
+		char s_mac_address[20], t_mac_address[20];
 		bool byip = false;
 
 		harm_funcs->zone_get_mac_address(sd->fd,s_mac_address);

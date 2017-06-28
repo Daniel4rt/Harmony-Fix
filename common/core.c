@@ -12,7 +12,7 @@
 #include "timer.h"
 #include "thread.h"
 #include "mempool.h"
-#include "../common/harmony.h"
+#include "harmony.h"
 #include "sql.h"
 #endif
 #include <stdlib.h>

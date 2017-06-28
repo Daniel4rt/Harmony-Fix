@@ -2,7 +2,7 @@
 #define _HARMONYCORE_H
 
 
-#include "../common/harmserv.h"
+#include "harmserv.h"
 
 void harmony_core_init();
 void harmony_core_final();

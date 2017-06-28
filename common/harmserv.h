@@ -102,10 +102,10 @@ struct HARMSRV_HARM_FUNCS {
 	// LOGIN
 	HSRV_CALL(login_init, void, (void));
 	HSRV_CALL(login_final, void, (void));
-	HSRV_CALL(login_process_auth, int, (int fd, uint8* buf, size_t buf_len, int8* username, int8* password, uint32* version));
+	HSRV_CALL(login_process_auth, int, (int fd, char* buf, size_t buf_len, char* username, char* password, uint32* version));
 	HSRV_CALL(login_process_auth2, int, (int fd, int level));
-	HSRV_CALL(login_process, void, (int fd, uint8* buf, size_t buf_len));
-	HSRV_CALL(login_get_mac_address, void, (int fd, int8 *buf));
+	HSRV_CALL(login_process, void, (int fd, char* buf, size_t buf_len));
+	HSRV_CALL(login_get_mac_address, void, (int fd, char *buf));
 
 	// ZONE
 	HSRV_CALL(zone_init, void, (void));
