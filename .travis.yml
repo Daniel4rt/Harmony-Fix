@@ -26,6 +26,8 @@ before_script:
   - mysql -u $DB_ROOT -e "GRANT ALL ON *.* TO '$DB_USER'@'$DB_HOST' IDENTIFIED BY '$DB_PASS';"
 
 script:
+  - chmod 777 configure
+  - chmod 777 Makefile.in
   - ./configure $CONFIGURE_FLAGS
   - make clean
   - make server
